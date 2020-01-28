@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="whiteDiv">
+    <div style=" border-bottom: dotted 2px rgb(175, 175, 175);">
+        <h1 class="firsth1"><span style="color: rgb(21, 149, 231);">O</span>ur Products</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <app-product-item 
+             *ngFor="let productEl of products let i = index" [product]="productEl">
+            </app-product-item>
+        </div>
+    </div>
+    </div>
+    <app-footer></app-footer>
+</div>

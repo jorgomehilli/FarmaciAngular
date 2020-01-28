@@ -1,0 +1,37 @@
+.firsth1{
+    font-family: Comfortaa;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.animation {
+	font-family: Helvetica ;
+	font-weight: bold;
+	font-size: 15px;
+	border:solid 2px;
+	border-color: rgb(21, 149, 231);
+	background-color:rgb(21, 149, 231);
+	color: white;
+	height: 40px;
+	width: 130px;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	transition: 0.5s;
+}
+.animation:hover {
+	color: rgb(21, 151, 231);
+	font-weight: bold;
+	border-color: (21, 149, 231);
+	background-color: transparent;
+	transition: 0.5s;
+}
+.bookingdetails{
+	padding: 20px;
+	background-color: white;
+	color: black;
+	width: auto;
+	margin-top: 20px;
+	overflow: hidden;
+}

@@ -1,0 +1,35 @@
+<button (click)="onClose()" class="btn btn-primary btn-sm pull-right">X</button>
+<h2 mat-dialog-title style="text-align: center;">{{isUpdate? 'Edit': 'Add'}} Product!</h2>
+<mat-dialog-content class="create-form">
+    <form  [formGroup]="productEditForm">
+        <div class="form-group">
+            <label for="name">Product Name:</label>
+            <input type="text" class="form-control" placeholder="Enter Product Name" name="product_name"
+                formControlName="name">
+                <span
+                *ngIf="!productEditForm.get('name').valid && productEditForm.get('name').touched"
+                 class="help-block red">Please enter a valid name!</span>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" class="form-control" placeholder="Enter Product Price" name="product_price"
+            formControlName="price">
+            <span
+            *ngIf="!productEditForm.get('price').valid && productEditForm.get('price').touched"
+             class="help-block red">Please enter a valid price!</span>
+        </div>
+        <div class="form-group">
+            <label for="img">ImagePath:</label>
+            <input type="text" class="form-control" placeholder="Enter Image Url" name="product_imgPath"
+            formControlName="imgPath">
+            <span
+            *ngIf="!productEditForm.get('imgPath').valid && productEditForm.get('imgPath').touched"
+             class="help-block red">Please enter a valid image path!</span>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button type="button" (click)="onSubmit()" class="animation">{{isUpdate ? 'Edit Product': 'Add Product'}}</button>
+
+
+</mat-dialog-actions>

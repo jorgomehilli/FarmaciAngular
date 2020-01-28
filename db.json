@@ -1,0 +1,103 @@
+{
+  "products": [
+    {
+      "name": "Ranital",
+      "price": "14.99",
+      "imgPath": "https://img-new.cgtrader.com/items/771790/6b0a1548cb/medicine-pills-package-3d-model-rigged-obj-mtl-3ds-fbx-blend-dae.png",
+      "id": 1
+    },
+    {
+      "name": "Codiovan",
+      "price": "9.60",
+      "imgPath": "https://static.wixstatic.com/media/04f121_1ade7959184d417c9fa6572f1c6b2607~mv2.png/v1/fill/w_576,h_576,al_c,lg_1/04f121_1ade7959184d417c9fa6572f1c6b2607~mv2.png",
+      "id": 2
+    },
+    {
+      "name": "Ibuprofen",
+      "price": "4.99",
+      "imgPath": "https://www.meijer.com/content/dam/meijer/product/0004/12/5082/59/0004125082595_2_A1C1_1200.png",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "firstname": "Kristian",
+      "lastname": "Sota",
+      "email": "asd@asd.com",
+      "password": "12345678",
+      "role": "admin",
+      "id": 2
+    },
+    {
+      "firstname": "Jorgo",
+      "lastname": "Mehilli",
+      "email": "jorgo.mehilli@gmail.com",
+      "password": "12345678",
+      "role": "user",
+      "id": 3
+    },
+    {
+      "firstname": "George",
+      "lastname": "Mehilli",
+      "email": "g.michael92@yahoo.com",
+      "password": "12345678",
+      "role": "user",
+      "id": 4
+    },
+    {
+      "firstname": "Kristi",
+      "lastname": "Beshello",
+      "email": "kristibeshello@fshn.com",
+      "password": "12345678",
+      "role": "user",
+      "id": 5
+    },
+    {
+      "firstname": "Jorgo",
+      "lastname": "Mehilli",
+      "email": "kristibeshello@fshn.com6",
+      "password": "12345678",
+      "role": "user",
+      "id": 6
+    }
+  ],
+  "cart1": [
+    {
+      "name": "Ibuprofen",
+      "price": "4.99",
+      "imgPath": "https://www.meijer.com/content/dam/meijer/product/0004/12/5082/59/0004125082595_2_A1C1_1200.png",
+      "p_id": 3,
+      "quantity": 1,
+      "userId": 5,
+      "id": 1
+    },
+    {
+      "name": "Ranital",
+      "price": "14.99",
+      "imgPath": "https://img-new.cgtrader.com/items/771790/6b0a1548cb/medicine-pills-package-3d-model-rigged-obj-mtl-3ds-fbx-blend-dae.png",
+      "p_id": 1,
+      "quantity": 1,
+      "userId": 5,
+      "id": 2
+    },
+    {
+      "name": "Ranital",
+      "price": "14.99",
+      "imgPath": "https://img-new.cgtrader.com/items/771790/6b0a1548cb/medicine-pills-package-3d-model-rigged-obj-mtl-3ds-fbx-blend-dae.png",
+      "p_id": 1,
+      "quantity": 1,
+      "userId": 6,
+      "id": 4
+    },
+    {
+      "name": "Ranital",
+      "price": "14.99",
+      "imgPath": "https://img-new.cgtrader.com/items/771790/6b0a1548cb/medicine-pills-package-3d-model-rigged-obj-mtl-3ds-fbx-blend-dae.png",
+      "p_id": 1,
+      "quantity": 1,
+      "userId": 3,
+      "id": 5
+    }
+  ],
+  "history": []
+}

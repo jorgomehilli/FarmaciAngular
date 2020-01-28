@@ -1,0 +1,27 @@
+<div class="container">
+<div class="signup-form">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h2>Log in</h2>
+            <p class="hint-text">Log into your account!</p>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Email"
+                    formControlName="email">
+                    <span
+                    *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched"
+                     class="help-block red">Please enter a valid email!</span>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password"
+                    formControlName="password">
+                    <span
+                    *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched"
+                     class="help-block red">Please enter a valid password!</span>
+            </div>
+            <div class="form-group">
+                <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
+            </div>
+        </form>
+        <div class="text-center">Don't have an account? <a style="cursor: pointer;" routerLink="/sign-up">Sign Up</a></div>
+    </div>
+    <app-footer></app-footer>
+</div>

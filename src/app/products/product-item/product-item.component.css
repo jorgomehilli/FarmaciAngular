@@ -1,0 +1,18 @@
+.cart-item{
+	border: solid 1px rgb(175, 175, 175);
+	margin-top: 20px;
+	padding: 20px;
+	width: auto;
+	background-color:	rgb(255, 255, 255);
+	margin-bottom: 10px;
+	border-radius: 0.25em;	
+	box-shadow: 4px 4px 3.5px rgb(175, 175, 175);
+}
+
+.book{
+	margin-top: 40px;
+	padding: 20px;
+	vertical-align: middle;
+	text-align: center;
+
+}

@@ -1,0 +1,26 @@
+.home{
+	padding-top :140px;
+   
+}
+.firsth1{
+    font-family: Comfortaa;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.firstp{
+    font-family: Autoradiographic Rg;
+    font-size: 20px;
+    max-width: 750px;
+    margin-top:30px;
+}
+
+
+.background{
+	margin-top: 50px;
+    background-image: url(../../assets/img/pharmacist.jpg);
+	height: 100%; 
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;  
+}

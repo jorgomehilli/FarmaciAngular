@@ -1,0 +1,44 @@
+<div class="container">
+<div class="whiteDiv">
+    <div>
+      <div style="border-bottom: dotted 2px rgb(175, 175, 175);">
+      <h1 class="top-text"><span style="color: rgb(21, 149, 231) ;">U</span>sers</h1>
+      </div>
+    </div>
+<div class="form-group form-inline" style=" margin-top: 20px;">
+  <label for="search">Search Users:</label>
+  <input  [(ngModel)] = "searchText" class="form-control" type="text" 
+  style="width: 30%; margin-left: 10px;" placeholder="Search By Name" id="search" >
+</div>    
+    <div class="table-style">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users | filter: searchText; let i = index ">
+            <td style="font-weight: bold;">{{i+1}}</td>
+            <td>{{user.firstname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td><a (click)="updateUser(user)" style="cursor: pointer;"><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td><a (click)="deleteUser(i)" style="cursor: pointer;"><span class="glyphicon glyphicon-trash red"></span></a></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+      <button class="animation" style="margin: 10px;" type="button" (click)="addUser()">New User
+      </button>
+      </div>
+      </div>
+      <app-footer></app-footer>
+</div>

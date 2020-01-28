@@ -1,0 +1,24 @@
+<button (click)="onClose()" class="btn btn-primary btn-sm pull-right">X</button>
+<h2 mat-dialog-title style="text-align: center;">Checkout!</h2>
+<hr>
+<mat-dialog-content style="padding: 40,0,40,0;">
+        <h5 style="font-family: Comfortaa;"><b>Order Details:</b></h5>
+        <br>
+        <div *ngFor = "let product of products;">
+           <span>
+               <img src="{{product.imgPath}}" style=" max-width: 150px; ">
+           </span>           
+            <span style="display: inline; float: right;">
+                <p><b>Name: </b>{{product.name}}</p>
+                <p><b>Price: </b>{{product.price}}</p>
+                <p><b>Quantity: </b>{{product.quantity}}</p>
+            </span>
+           <hr>
+        </div>
+        <hr>
+        <span><p style="font-family: Comfortaa;">Total: $ {{ this.total}}</p></span>
+        <button type="button" (click)="onPurchase()" class="animation">Purchase $</button>
+
+</mat-dialog-content>
+
+
