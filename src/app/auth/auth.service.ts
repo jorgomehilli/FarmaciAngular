@@ -17,14 +17,19 @@ export class AuthService {
         private snackBar: MatSnackBar) {
     }
 
-    recieveUsers(): Observable< User[] > {
-        return this.http.get< User[] >('http://localhost:3000/users');
+    recieveUsers(): Observable<User[]> {
+        return this.http.get<User[]>('http://localhost:3000/users');
     }
 
     signUp(formValue: any) {
-        return this.http.post('http://localhost:3000/users', formValue);
+        return this.http.post('http://localhost:8787/users/signup', formValue);
     }
 
+    authenticate(formValue: any) {
+        return this.http.post('http://localhost:8787/authenticate',
+            { "username": formValue.email, "password": formValue.password });
+                        
+    }
 
     isAuthenticated() {
 
@@ -47,7 +52,6 @@ export class AuthService {
     login(user: User) {
         this.actualUserId = user.id;
         this.isLoggedIn = true;
-        this.role = user.role;
         localStorage.setItem('isLoggedIn', JSON.stringify(this.isLoggedIn));
         localStorage.setItem('userId', JSON.stringify(user.id));
         localStorage.setItem('username', JSON.stringify(user.firstname));
@@ -108,13 +112,13 @@ export class AuthService {
         return this.http.put<any>(`http://localhost:3000/users/${user.id}`, user);
     }
 
-    getActualUserId(){
-        
-        this.actualUserId = JSON.parse(localStorage.getItem('userId')) ;
-        if(this.getActualUserId !== null)
-        return this.actualUserId;
+    getActualUserId() {
+
+        this.actualUserId = JSON.parse(localStorage.getItem('userId'));
+        if (this.getActualUserId !== null)
+            return this.actualUserId;
     }
-    getUsername(){
+    getUsername() {
         this.username = localStorage.getItem('username');
         return this.username;
     }

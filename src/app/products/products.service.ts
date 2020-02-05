@@ -10,7 +10,7 @@ export class ProductsService {
     }
     
     recieveData() {
-        return this.http.get<Product[]>('http://localhost:3000/products');
+        return this.http.get<Product[]>('http://localhost:8787/products');
     }
 
     addNewProduct(formValue: any): Observable<Product> {

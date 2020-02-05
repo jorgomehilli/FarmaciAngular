@@ -26,30 +26,35 @@ export class SignupComponent implements OnInit {
       'firstname': new FormControl(null, Validators.required),
       'lastname': new FormControl(null, Validators.required),
       'email': new FormControl(null, [Validators.required, Validators.email]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      'role': new FormControl('user'),
+      'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
   }
 
 
-
-  onSubmit() {
-    if(this.signupForm.valid)
-    {
-    this.authService.recieveUsers().subscribe((usersResponse) => {
-      if (usersResponse.filter(user => user.email === this.signupForm.value.email).length) {
-        this.snackBar.open('User with this email already exists!','OK',{ 
-          duration: 3000});
-      } else {
-        this.authService.signUp(this.signupForm.value).subscribe((responseData: User) => {
-          console.log(responseData);
-          this.snackBar.open('You have successfully registered!','',{ 
-            duration: 3000});
-          this.signupForm.reset();
-        })
-      }
+  onSubmit(){
+    this.authService.signUp(this.signupForm.value).subscribe((user: any) =>{
+      console.log(user);
+      this.signupForm.reset();      
+      this.snackBar.open("Successfully registered !" , "", {duration: 3000});
     })
-  } else{
-     this.snackBar.open('Please fill in all the fields!', '', {duration:3000}); }
   }
+  // onSubmit() {
+  //   if(this.signupForm.valid)
+  //   {
+  //   this.authService.recieveUsers().subscribe((usersResponse) => {
+  //     if (usersResponse.filter(user => user.email === this.signupForm.value.email).length) {
+  //       this.snackBar.open('User with this email already exists!','OK',{ 
+  //         duration: 3000});
+  //     } else 
+  //       this.authService.signUp(this.signupForm.value).subscribe((responseData: User) => {
+  //         console.log(responseData);
+  //         this.snackBar.open('You have successfully registered!','',{ 
+  //           duration: 3000});
+  //         this.signupForm.reset();
+  //       })
+      
+  //   })
+  // } else{
+  //    this.snackBar.open('Please fill in all the fields!', '', {duration:3000}); }
+  // }
 }
