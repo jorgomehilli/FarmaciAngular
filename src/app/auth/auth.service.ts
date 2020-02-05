@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable()
 export class AuthService {
@@ -12,6 +13,7 @@ export class AuthService {
     private isAdmin;
     private actualUserId: number;
     private username: string;
+    private helper = new JwtHelperService();
 
     constructor(private http: HttpClient,
         private snackBar: MatSnackBar) {
@@ -82,12 +84,21 @@ export class AuthService {
     }
 
     getState(): boolean {
-        if (localStorage.getItem('isLoggedIn') == null) {
-            this.isLoggedIn = false;
-        } else {
-            this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
-        }
-        return this.isLoggedIn;
+
+        let token = localStorage.getItem('token');
+        if(token && !this.helper.isTokenExpired(token))
+        return true;
+        else
+        return false;
+
+        // return false;
+
+        // if (localStorage.getItem('isLoggedIn') == null) {
+        //     this.isLoggedIn = false;
+        // } else {
+        //     this.isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+        // }
+        // return this.isLoggedIn;
     }
 
     getRole() {
@@ -95,13 +106,29 @@ export class AuthService {
     }
 
     getAdmin(): boolean {
-        if (localStorage.getItem('isAdmin') == null) {
-            this.isAdmin = false;
-        } else {
-            this.isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
-        }
 
-        return this.isAdmin;
+        // let token = localStorage.getItem('token');
+        // let tokenPayload = this.helper.decodeToken(token);
+        // let role = JSON.parse(JSON.stringify(tokenPayload.role[0].authority));
+
+        // if(token && !this.helper.isTokenExpired(token)) {
+        //     if(role == 'ROLE_ADMIN')
+        //     return true;
+        // }else return false;
+        
+        return false;
+    
+        
+
+
+
+        // if (localStorage.getItem('isAdmin') == null) {
+        //     this.isAdmin = false;
+        // } else {
+        //     this.isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
+        // }
+
+        // return this.isAdmin;
     }
 
     deleteUserFromDb(user: User): Observable<void> {
