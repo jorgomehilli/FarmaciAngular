@@ -28,13 +28,24 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     this.authService.authenticate(this.loginForm.value).subscribe(response => {
-     let token = JSON.parse(JSON.stringify(response));
-     console.log(token);
-      localStorage.setItem('token', token.jwt );
-      this.router.navigate(['/home']);
-     });
+      let token = JSON.parse(JSON.stringify(response));
+      console.log(response);
+      localStorage.setItem('token', token.jwt);
+      localStorage.setItem('name', token.firstName);
+      if (this.authService.getAdmin()) {
+        this.router.navigate(['/admin/users']);
+        this.snackBar.open('Successfully logged in as admin!', '', {
+          duration: 3000
+        });
+      } else {
+        this.router.navigate(['/home']);
+        this.snackBar.open('Successfully logged in!', '', {
+          duration: 3000
+        });
+      }
+    });
   }
 
   // onSubmit() {

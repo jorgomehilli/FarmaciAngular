@@ -19,19 +19,27 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        let flag = true;
+            if (this.authService.getState())
+            return true;
+        else {
+            this.snackBar.open('Login first!', '', {
+                duration: 3000
+            });
+            this.router.navigate(['/authentication']);
+            return false;
+        }
+        // let flag = true;
 
-        return this.authService.isAuthenticated().pipe(
-            map(authenticated => {
-                console.log(authenticated);
-                if (!authenticated) {
-                    console.log(authenticated);
-                    this.snackBar.open('Login first!','OK',{ 
-                        duration: 5000});
-                    flag = false;
-
-                    this.router.navigate(['/authentication']);
-                }
-            }), map(() => flag));
+        // return this.authService.isAuthenticated().pipe(
+        //     map(authenticated => {
+        //         console.log(authenticated);
+        //         if (!authenticated) {
+        //             console.log(authenticated);
+        //             this.snackBar.open('Login first!','OK',{ 
+        //                 duration: 5000});
+        //             flag = false;
+        //             this.router.navigate(['/authentication']);
+        //         }
+        //     }), map(() => flag));
     }
 }

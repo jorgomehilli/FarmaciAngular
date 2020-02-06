@@ -30,24 +30,24 @@ export class AuthService {
     authenticate(formValue: any) {
         return this.http.post('http://localhost:8787/authenticate',
             { "username": formValue.email, "password": formValue.password });
-                        
+
     }
 
-    isAuthenticated() {
+    // isAuthenticated() {
 
-        const authObservable = Observable.create(observer => {
-            observer.next(this.isLoggedIn);
-        });
-        return authObservable;
-    }
+    //     const authObservable = Observable.create(observer => {
+    //         observer.next(this.isLoggedIn);
+    //     });
+    //     return authObservable;
+    // }
 
-    isAdminObservable() {
+    // isAdminObservable() {
 
-        const adminObservable = Observable.create(observer => {
-            observer.next(this.isAdmin);
-        });
-        return adminObservable;
-    }
+    //     const adminObservable = Observable.create(observer => {
+    //         observer.next(this.isAdmin);
+    //     });
+    //     return adminObservable;
+    // }
 
 
 
@@ -68,31 +68,36 @@ export class AuthService {
 
     logout() {
 
-        this.actualUserId = null;
-        this.isLoggedIn = false;
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('username');
-
-        if (localStorage.getItem('isAdmin') !== null) {
-            localStorage.removeItem('isAdmin');
-            this.isAdmin = false;
-        }
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
         this.snackBar.open('Successfully logged out!', '', {
             duration: 3000
         });
+
+        // this.actualUserId = null;
+        // this.isLoggedIn = false;
+        // localStorage.removeItem('isLoggedIn');
+        // localStorage.removeItem('userId');
+        // localStorage.removeItem('username');
+
+        // if (localStorage.getItem('isAdmin') !== null) {
+        //     localStorage.removeItem('isAdmin');
+        //     this.isAdmin = false;
+        // }
+        // this.snackBar.open('Successfully logged out!', '', {
+        //     duration: 3000
+        // });
     }
 
     getState(): boolean {
 
         let token = localStorage.getItem('token');
-        if(token && !this.helper.isTokenExpired(token))
-        return true;
+        if (token && !this.helper.isTokenExpired(token))
+            return true;
         else
-        return false;
+            return false;
 
         // return false;
-
         // if (localStorage.getItem('isLoggedIn') == null) {
         //     this.isLoggedIn = false;
         // } else {
@@ -107,18 +112,20 @@ export class AuthService {
 
     getAdmin(): boolean {
 
-        // let token = localStorage.getItem('token');
-        // let tokenPayload = this.helper.decodeToken(token);
-        // let role = JSON.parse(JSON.stringify(tokenPayload.role[0].authority));
+        if (localStorage.getItem('token') !== null) {
 
-        // if(token && !this.helper.isTokenExpired(token)) {
-        //     if(role == 'ROLE_ADMIN')
-        //     return true;
-        // }else return false;
-        
-        return false;
-    
-        
+            let token = localStorage.getItem('token');
+            let tokenPayload = this.helper.decodeToken(token);
+            let role = JSON.parse(JSON.stringify(tokenPayload.role[0].authority));
+
+            if (!this.helper.isTokenExpired(token) && role == 'ROLE_ADMIN') {
+                return true;
+            }
+            else { return false; }
+
+        } else { return false; }
+
+
 
 
 
@@ -146,7 +153,7 @@ export class AuthService {
             return this.actualUserId;
     }
     getUsername() {
-        this.username = localStorage.getItem('username');
+        this.username = localStorage.getItem('name');
         return this.username;
     }
 }
