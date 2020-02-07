@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { ProductsService } from 'src/app/products/products.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -23,11 +22,11 @@ export class UsersdialogComponent implements OnInit {
     if (this.user) {
       this.isUpdate = true;
       this.userForm = new FormGroup({
-        'firstname': new FormControl(this.user.firstname, Validators.required),
-        'lastname': new FormControl(this.user.lastname, Validators.required),
+        'firstname': new FormControl(this.user.firstName, Validators.required),
+        'lastname': new FormControl(this.user.lastName, Validators.required),
         'email': new FormControl(this.user.email, Validators.email),
         'password': new FormControl(this.user.password, Validators.minLength(6)),
-        'role': new FormControl(this.user.role, Validators.required),
+        'role': new FormControl(this.user.roles[0].name, Validators.required),
         'id': new FormControl(this.user.id, Validators.required)
       });
 

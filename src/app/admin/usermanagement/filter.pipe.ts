@@ -6,14 +6,14 @@ import { Product } from 'src/app/products/product.model';
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(users: User[] , searchText: string): User[] | Product [] {
+  transform(users: any[] , searchText: string): User[] | Product [] {
     if(!users || !searchText){
         return users;
     }
 
       return users.filter(user => {
-        return user.firstname.toLowerCase().includes(searchText.toLowerCase()) ||
-          user.lastname.toLowerCase().includes(searchText.toLowerCase()) 
+        return user.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
+          user.lastName.toLowerCase().includes(searchText.toLowerCase()) 
       })
   
    }

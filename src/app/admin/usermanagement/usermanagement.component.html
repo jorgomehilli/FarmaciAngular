@@ -26,10 +26,10 @@
         <tbody>
           <tr *ngFor="let user of users | filter: searchText; let i = index ">
             <td style="font-weight: bold;">{{i+1}}</td>
-            <td>{{user.firstname}}</td>
-            <td>{{user.lastname}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
             <td>{{user.email}}</td>
-            <td>{{user.role}}</td>
+            <td>{{user.roles[0].name}}</td>
             <td><a (click)="updateUser(user)" style="cursor: pointer;"><span class="glyphicon glyphicon-edit"></span></a></td>
             <td><a (click)="deleteUser(i)" style="cursor: pointer;"><span class="glyphicon glyphicon-trash red"></span></a></td>
           </tr>

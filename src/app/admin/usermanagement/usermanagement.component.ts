@@ -11,7 +11,7 @@ import { UsersdialogComponent } from './usersdialog/usersdialog.component';
 })
 export class UsermanagementComponent implements OnInit {
 
-  private users: User[] = [];
+  private users: any[] = [];
   searchText: string;
 
   constructor(private authService: AuthService,
@@ -19,8 +19,9 @@ export class UsermanagementComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.authService.recieveUsers().subscribe((usersResponse: User[]) => {
+    this.authService.recieveUsers().subscribe((usersResponse: any[]) => {
       this.users = usersResponse;
+      console.log(this.users);
     });
 
   }

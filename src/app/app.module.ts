@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -32,6 +32,7 @@ import { CartdialogComponent } from './cart/cartdialog/cartdialog.component';
 import { appReducers } from './store/reducers/app.reducer';
 import { CartEffects } from './store/effects/cart.effects';
 import { FooterComponent } from './footer/footer.component';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -76,8 +77,11 @@ import { FooterComponent } from './footer/footer.component';
     AuthService,
     AuthGuard,
     AdminGuard,
-    ProductsService
-  ],
+    ProductsService,
+    {provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
