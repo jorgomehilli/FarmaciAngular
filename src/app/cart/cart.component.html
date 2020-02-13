@@ -21,10 +21,10 @@
           <td><b>{{i+1}}</b></td>
           <td>{{ product.name }}</td>
           <td>€ {{ product.price }}</td>
-          <td><a (click)="decrementQuantity(product)"
+          <td><a (click)="decrementQuantity(i)"
             style="cursor: pointer;"><span class="glyphicon glyphicon-minus"></span></a>
             {{ product.quantity }}
-            <a (click)="incrementQuantity(product)"
+            <a (click)="incrementQuantity(i)"
             style="cursor: pointer;"><span class="glyphicon glyphicon-plus"></span></a>
           </td>
           <td><a (click)="deleteItem(i)" style="cursor: pointer;"><span

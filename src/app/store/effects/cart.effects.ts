@@ -15,12 +15,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable()
 export class CartEffects{
-    @Effect()
-    getItems$ = this._actions$.pipe(
-        ofType<GetItems>(ECartActions.GetItems),
-        switchMap(() => this._cartService.getProducts(this.authService.getActualUserId())),
-        switchMap( (response: any [])  => of(new GetItemsSuccess(response)))
-      );
+  
+    //@Effect()
+    // getItems$ = this._actions$.pipe(
+    //     ofType<GetItems>(ECartActions.GetItems),
+    //     switchMap(() => this._cartService.getProducts(this.authService.getActualUserId())),
+    //     switchMap( (response: any [])  => of(new GetItemsSuccess(response)))
+    //   );
 
 
 

@@ -9,6 +9,7 @@ import { AppState, initialAppState } from '../store/state/app.state';
 import { GetItems, DeleteItem } from '../store/actions/cart.actions';
 import { initialCartState } from '../store/state/cart.state';
 import { selectUserList } from '../store/selectors/cart.selectors';
+import { error } from 'util';
 
 @Component({
   selector: 'app-cart',
@@ -30,7 +31,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     // this.store.dispatch( new GetItems );
-    this.cartService.getProducts(this.authService.getActualUserId())
+    this.cartService.getProducts()
     .subscribe((recieveData: any[]) => {
       this.products = recieveData;
       console.log(this.products);
@@ -53,29 +54,52 @@ export class CartComponent implements OnInit {
 
   }
 
-  incrementQuantity(product: any) {
+  incrementQuantity(index: number) {
 
-    if (product.quantity >= 5) return;
+    if(this.products[index].quantity >=5){
+      this.snackBar.open("Quantity cannot exceed 5",'', {duration:3000});
+      return;
+    }
 
-    this.newQuantity = product.quantity + 1;
-    this.cartService.modifyProduct(product, this.newQuantity).subscribe((modified) => {
-      console.log(modified);
-      product.quantity = this.newQuantity;
-    })
-    error => { console.log(error); }
+
+    this.cartService.incrementQuantity(this.products[index].id).subscribe(()=>{
+      this.products[index].quantity  = this.products[index].quantity + 1;
+    },
+    error =>{ console.log(error);});
+    
+
+    // if (product.quantity >= 5) return;
+
+    // this.newQuantity = product.quantity + 1;
+    // this.cartService.modifyProduct(product, this.newQuantity).subscribe((modified) => {
+    //   console.log(modified);
+    //   product.quantity = this.newQuantity;
+    // })
+    // error => { console.log(error); }
 
   }
 
-  decrementQuantity(product: any) {
+  decrementQuantity(index: number) {
 
-    if (product.quantity <= 1) return;
+    if(this.products[index].quantity <=1){
+      this.snackBar.open("Quantity cannot be lower than 1",'', {duration:3000});
+      return;
+    }
 
-    this.newQuantity = product.quantity - 1;
-    this.cartService.modifyProduct(product, this.newQuantity).subscribe((modified) => {
-      console.log(modified);
-      product.quantity = this.newQuantity;
-    });
-    error => { console.log(error); }
+
+    this.cartService.decrementQuantity(this.products[index].id).subscribe(()=>{
+      this.products[index].quantity  = this.products[index].quantity - 1;
+    },
+    error =>{ console.log(error);});
+
+    // if (product.quantity <= 1) return;
+
+    // this.newQuantity = product.quantity - 1;
+    // this.cartService.modifyProduct(product, this.newQuantity).subscribe((modified) => {
+    //   console.log(modified);
+    //   product.quantity = this.newQuantity;
+    // });
+    // error => { console.log(error); }
 
   }
 
