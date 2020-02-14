@@ -11,14 +11,14 @@ import { ProductsdialogComponent } from './productsdialog/productsdialog.compone
 })
 export class ProductmanagementComponent implements OnInit {
 
-  private products: Product[];
+  private products: any[];
   
   constructor(private productService: ProductsService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.productService.recieveData().subscribe((products:Product[])=>{
+    this.productService.recieveData().subscribe((products:any[])=>{
       this.products=products;
     },
     error=> (console.log(error)));

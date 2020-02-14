@@ -14,10 +14,10 @@ export class ProductsService {
     }
 
     addNewProduct(formValue: any): Observable<Product> {
-        return this.http.post<Product>('http://localhost:3000/products', formValue);
+        return this.http.post<Product>('http://localhost:8787/products/add', formValue);
     }
     deleteProduct(p: Product) {
-        return this.http.delete(`http://localhost:3000/products/${p.id}`);
+        return this.http.delete(`http://localhost:8787/products/delete/${p.id}`);
     }
 
     updateProduct(p: any) {
