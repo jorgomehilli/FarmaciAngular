@@ -27,6 +27,11 @@ export class AuthService {
         return this.http.post('http://localhost:8787/users/signup', formValue);
     }
 
+    addUser(formValue: any) {
+        console.log(formValue.name);
+        return this.http.post('http://localhost:8787/users/add', formValue);
+    }
+
     authenticate(formValue: any) {
         return this.http.post('http://localhost:8787/authenticate',
             { "username": formValue.email, "password": formValue.password });
@@ -142,12 +147,12 @@ export class AuthService {
         // return this.isAdmin;
     }
 
-    deleteUserFromDb(user: User): Observable<void> {
-        return this.http.delete<void>(`http://localhost:3000/users/${user.id}`);
+    deleteUserFromDb(user: any): Observable<void> {
+        return this.http.delete<void>(`http://localhost:8787/users/delete/${user.userId}`);
     }
 
     updateUser(user: any) {
-        return this.http.put<any>(`http://localhost:3000/users/${user.id}`, user);
+        return this.http.put<any>(`http://localhost:8787/users/update/${user.id}`, user);
     }
 
     getActualUserId() {

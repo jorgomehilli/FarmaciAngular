@@ -25,9 +25,8 @@ export class UsersdialogComponent implements OnInit {
         'firstname': new FormControl(this.user.firstName, Validators.required),
         'lastname': new FormControl(this.user.lastName, Validators.required),
         'email': new FormControl(this.user.email, Validators.email),
-        'password': new FormControl(this.user.password, Validators.minLength(6)),
         'role': new FormControl(this.user.roles[0].name, Validators.required),
-        'id': new FormControl(this.user.id, Validators.required)
+        'id': new FormControl(this.user.userId, Validators.required)
       });
 
     }
@@ -38,9 +37,7 @@ export class UsersdialogComponent implements OnInit {
         'lastname': new FormControl(null, Validators.required),
         'email': new FormControl(null, Validators.email),
         'password': new FormControl(null, Validators.minLength(6)),
-        'role': new FormControl(null, Validators.required),
-        'id': new FormControl(null, Validators.required)
-
+        'role': new FormControl("ROLE_USER", Validators.required)
 
       });
     }
@@ -51,7 +48,8 @@ export class UsersdialogComponent implements OnInit {
     if(!this.userForm.valid) return;
 
     if (!this.isUpdate) {
-      this.authService.signUp(this.userForm.value).subscribe((data) => {
+      this.authService.addUser(this.userForm.value).subscribe((data) => {
+        console.log(this.userForm.value);
         this.matDialogRef.close(true);
         this.snackBar.open('User added successfully!','',{duration:3000});
       },
