@@ -118,16 +118,26 @@ export class CartComponent implements OnInit {
       width: '45%',
       data: this.products
     });
-    
-    dialogRef.afterClosed().subscribe((changed: Boolean) => {
-      if (changed) {
-        for(let cartEl of this.products){          
-          this.cartService.deleteItemFromCart(cartEl.id).subscribe(()=>{
-          }, error =>{console.log(error)});
-        }
-        this.snackBar.open('Successfully placed order !', '', { duration:3000 });
-        this.products = [];
+
+    dialogRef.afterClosed().subscribe((changed) => {
+      if(changed){
+        this.cartService.purchaseCartItems().subscribe(()=>{
+          this.snackBar.open('Successfully placed order !', '', { duration:3000 });
+          this.products = [];
+        }, error =>{ console.log(error);
+        });
       }
-    }); 
+    })
+    
+    // dialogRef.afterClosed().subscribe((changed: Boolean) => {
+    //   if (changed) {
+    //     for(let cartEl of this.products){          
+    //       this.cartService.deleteItemFromCart(cartEl.id).subscribe(()=>{
+    //       }, error =>{console.log(error)});
+    //     }
+    //     this.snackBar.open('Successfully placed order !', '', { duration:3000 });
+    //     this.products = [];
+    //   }
+    // }); 
   }
 }

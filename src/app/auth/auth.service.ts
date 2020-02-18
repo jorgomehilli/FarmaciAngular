@@ -143,7 +143,6 @@ export class AuthService {
         // } else {
         //     this.isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
         // }
-
         // return this.isAdmin;
     }
 
@@ -156,7 +155,6 @@ export class AuthService {
     }
 
     getActualUserId() {
-
         this.actualUserId = JSON.parse(localStorage.getItem('userId'));
         if (this.getActualUserId !== null)
             return this.actualUserId;

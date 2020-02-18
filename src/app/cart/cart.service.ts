@@ -33,6 +33,10 @@ export class CartService {
         return this.http.delete<void>(`http://localhost:8787/cart/delete/${id}`);
     }
 
+    purchaseCartItems(): Observable<void>{
+      return  this.http.delete<void>('http://localhost:8787/cart/purchase/');
+    }
+
     incrementQuantity(id:number) {
 
 
