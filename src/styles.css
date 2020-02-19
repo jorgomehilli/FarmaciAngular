@@ -2,11 +2,12 @@ body{
 	background: url("./assets/img/backgroundpharma1.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-size: cover;
+	background-size: cover;
+	font-family: Roboto;
 }
 
-.top-text{
-    font-family: 'Times New Roman', Times, serif;
+.top-text{    
+	font-family: 'Times New Roman', Times, serif;
     font-size: 35px;
     font-weight: bold;
     text-align: center;
@@ -20,7 +21,7 @@ body{
 	border-radius: 0.25em;
 }
 
-.animation {
+.animation {	
 	font-family: Helvetica;
 	font-weight: bold;
 	font-size: 15px;

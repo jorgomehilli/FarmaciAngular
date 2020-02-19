@@ -122,7 +122,6 @@ export class AuthService {
     getAdmin(): boolean {
 
         if (localStorage.getItem('token') !== null) {
-
             let token = localStorage.getItem('token');
             let tokenPayload = this.helper.decodeToken(token);
             let role = JSON.parse(JSON.stringify(tokenPayload.role[0].authority));

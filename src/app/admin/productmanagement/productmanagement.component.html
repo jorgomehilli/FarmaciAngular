@@ -12,6 +12,7 @@
             <th scope="col">#</th>
             <th scope="col">Medicine Name</th>
             <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
@@ -21,6 +22,7 @@
             <td style="font-weight: bold;">{{ i+1 }}</td>
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
+            <td>{{ product.quantity }}</td>
             <td><a style="cursor: pointer;"
                (click)="updateProduct(product)"
                ><span class="glyphicon glyphicon-edit"></span></a></td>
