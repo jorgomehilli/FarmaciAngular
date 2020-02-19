@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
       console.log(productsResponse);
     }, error => {
       console.log(error);
-    })
+    });
   };
 
   getAuthRole(){

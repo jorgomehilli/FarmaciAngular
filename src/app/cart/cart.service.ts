@@ -33,7 +33,8 @@ export class CartService {
         return this.http.delete<void>(`http://localhost:8787/cart/delete/${id}`);
     }
 
-    purchaseCartItems(): Observable<void>{
+    purchaseCartItems(cart_items: any[]): Observable<void>{
+        console.log(cart_items)
       return  this.http.delete<void>('http://localhost:8787/cart/purchase/');
     }
 

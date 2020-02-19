@@ -27,6 +27,7 @@ export class ProductsdialogComponent implements OnInit {
         'name': new FormControl(this.p.name, Validators.required),
         'price': new FormControl(this.p.price, Validators.required),
         'imgPath': new FormControl(this.p.imgPath, Validators.required),
+        'quantity': new FormControl(this.p.quantity, Validators.required),
         'id': new FormControl(this.p.id, Validators.required)
 
       });
@@ -37,7 +38,8 @@ export class ProductsdialogComponent implements OnInit {
       this.productEditForm = new FormGroup({
         'name': new FormControl(null, Validators.required),
         'price': new FormControl(null, Validators.required),
-        'imgPath': new FormControl(null, Validators.required)
+        'imgPath': new FormControl(null, Validators.required),
+        'quantity': new FormControl(null, Validators.required)
 
       });
     }

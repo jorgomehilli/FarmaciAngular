@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material';
 import { CartService } from 'src/app/cart/cart.service';
 import { User } from '../user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +17,8 @@ export class SignupComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private snackBar: MatSnackBar,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private router: Router) {
 
   }
 
@@ -36,6 +38,8 @@ export class SignupComponent implements OnInit {
       console.log(user);
       this.signupForm.reset();      
       this.snackBar.open("Successfully registered !" , "", {duration: 3000});
+      this.router.navigate(['/login']);
+      
     })
   }
   // onSubmit() {

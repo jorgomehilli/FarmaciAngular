@@ -121,13 +121,13 @@ export class CartComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((changed) => {
       if(changed){
-        this.cartService.purchaseCartItems().subscribe(()=>{
+        this.cartService.purchaseCartItems(this.products).subscribe(()=>{
           this.snackBar.open('Successfully placed order !', '', { duration:3000 });
           this.products = [];
         }, error =>{ console.log(error);
         });
       }
-    })
+    });
     
     // dialogRef.afterClosed().subscribe((changed: Boolean) => {
     //   if (changed) {
@@ -140,4 +140,6 @@ export class CartComponent implements OnInit {
     //   }
     // }); 
   }
+
+  
 }

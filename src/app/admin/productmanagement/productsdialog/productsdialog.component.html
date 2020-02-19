@@ -19,6 +19,14 @@
              class="help-block red">Please enter a valid price!</span>
         </div>
         <div class="form-group">
+            <label for="price">Quantity:</label>
+            <input type="text" class="form-control" placeholder="Enter Product Quantity" name="product_quantity"
+            formControlName="quantity">
+            <span
+            *ngIf="!productEditForm.get('quantity').valid && productEditForm.get('quantity').touched"
+             class="help-block red">Please enter quantity!</span>
+        </div>
+        <div class="form-group">
             <label for="img">ImagePath:</label>
             <input type="text" class="form-control" placeholder="Enter Image Url" name="product_imgPath"
             formControlName="imgPath">
