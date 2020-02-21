@@ -10,13 +10,14 @@ import { selectUserList } from 'src/app/store/selectors/cart.selectors';
 import { Subscription } from 'rxjs';
 import { AddItem } from '../../store/actions/cart.actions'
 
+
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.css']
 })
 export class ProductItemComponent implements OnInit {
-  @Input() product: Product;
+  @Input() product: any;
   private cartProducts: any[] = [];
   private newQuantity;
 
@@ -46,15 +47,18 @@ export class ProductItemComponent implements OnInit {
     //       return;
 
     //     }
-
     //   }
 
     //   this.cartService.addItemToCart(this.product,
     //     this.authService.getActualUserId());
 
     // });
+    if (this.product.quantity<=0){
+    this.snackBar.open('There is no '+this.product.name+' left in stock','',{duration:3000});
+    return;}
+    else
     this.cartService.addItemToCart(this.product.id);
-
+    this.product.quantity = this.product.quantity-1;
   }
 
 

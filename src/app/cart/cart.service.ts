@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class CartService {
+    private itemsNumber;
 
     constructor(private http: HttpClient,
         private snackBar: MatSnackBar,
@@ -18,13 +19,32 @@ export class CartService {
         return this.http.get(`http://localhost:8787/users/cart`);
     }
 
-    addItemToCart(id:number) {
+    getCartItemsNumber() {
+        this.http.get('http://localhost:8787/cart/products/number')
+            .subscribe((data) => {
+                this.itemsNumber = data;
+                return this.itemsNumberObservable();
+            });
+    }
+
+    itemsNumberObservable(): Observable<number> {
+        const numberObservable = Observable.create(observer => {
+            observer.next(this.itemsNumber);
+        });
+        return numberObservable;
+    }
+
+
+
+
+    addItemToCart(id: number) {
         this.http.post(`http://localhost:8787/cart/add`, id)
             .subscribe((postData: any) => {
                 console.log(postData);
                 this.snackBar.open('You added ' + postData.product.name + ' to the shopping cart! ', '', {
                     duration: 3000
                 });
+                this.getCartItemsNumber();
             });
 
     }
@@ -33,12 +53,12 @@ export class CartService {
         return this.http.delete<void>(`http://localhost:8787/cart/delete/${id}`);
     }
 
-    purchaseCartItems(cart_items: any[]): Observable<void>{
+    purchaseCartItems(cart_items: any[]): Observable<void> {
         console.log(cart_items)
-      return  this.http.delete<void>('http://localhost:8787/cart/purchase/');
+        return this.http.delete<void>('http://localhost:8787/cart/purchase/');
     }
 
-    incrementQuantity(id:number) {
+    incrementQuantity(id: number) {
 
 
         return this.http.get(`http://localhost:8787/cart/increment/${id}`);
@@ -55,9 +75,10 @@ export class CartService {
         // });
     }
 
-    decrementQuantity(id:number){
+    decrementQuantity(id: number) {
 
         return this.http.get(`http://localhost:8787/cart/decrement/${id}`);
     }
+
 
 }

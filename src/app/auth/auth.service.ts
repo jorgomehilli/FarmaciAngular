@@ -4,6 +4,7 @@ import { User } from './user.model';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,8 @@ export class AuthService {
     private helper = new JwtHelperService();
 
     constructor(private http: HttpClient,
-        private snackBar: MatSnackBar) {
+        private snackBar: MatSnackBar,
+        private router: Router) {
     }
 
     recieveUsers(): Observable<any[]> {
@@ -38,7 +40,7 @@ export class AuthService {
 
     }
 
-    getToken(){
+    getToken() {
         return localStorage.getItem('token');
     }
 
@@ -100,11 +102,31 @@ export class AuthService {
 
     getState(): boolean {
 
-        let token = localStorage.getItem('token');
-        if (token && !this.helper.isTokenExpired(token))
-            return true;
-        else
-            return false;
+        if (localStorage.getItem('token') !== null) {
+            let token = localStorage.getItem('token');
+
+            if (this.helper.isTokenExpired(token)) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('name');
+                this.snackBar.open('Session Expired :(','',{duration:3000});
+                this.router.navigate(['/login']);
+                return false;
+            } else {return true;}
+
+        }
+         else {return false;}
+
+
+
+
+        // let token = localStorage.getItem('token');
+        // if (token && !this.helper.isTokenExpired(token))
+        //     return true;
+        // else
+        //     return false;
+
+
+
 
         // return false;
         // if (localStorage.getItem('isLoggedIn') == null) {

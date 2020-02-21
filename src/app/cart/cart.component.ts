@@ -47,6 +47,7 @@ export class CartComponent implements OnInit {
         this.snackBar.open('Successfully removed item from cart!', '', {
           duration: 3000
         });
+        this.cartService.getCartItemsNumber();
       },
         error => {
           console.log(error);
@@ -55,15 +56,19 @@ export class CartComponent implements OnInit {
   }
 
   incrementQuantity(index: number) {
+    console.log(this.products[index].stockQuantity);
 
-    if(this.products[index].quantity >=5){
-      this.snackBar.open("Quantity cannot exceed 5",'', {duration:3000});
-      return;
-    }
-
-
+    if(this.products[index].stockQuantity>0){
+      if(this.products[index].quantity >=5){
+        this.snackBar.open("Quantity cannot exceed 5",'', {duration:3000});
+        return;
+      }
+    } else
+    {return;}
+    
     this.cartService.incrementQuantity(this.products[index].id).subscribe(()=>{
       this.products[index].quantity  = this.products[index].quantity + 1;
+      this.products[index].stockQuantity = this.products[index].stockQuantity-1;
     },
     error =>{ console.log(error);});
     
@@ -124,6 +129,7 @@ export class CartComponent implements OnInit {
         this.cartService.purchaseCartItems(this.products).subscribe(()=>{
           this.snackBar.open('Successfully placed order !', '', { duration:3000 });
           this.products = [];
+          this.cartService.getCartItemsNumber();
         }, error =>{ console.log(error);
         });
       }

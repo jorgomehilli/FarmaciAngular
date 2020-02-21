@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { stringify } from 'querystring';
+import { CartService } from 'src/app/cart/cart.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   test: any;
 
   constructor(private authService: AuthService,
+    private cartService: CartService,
     private router: Router,
     private snackBar: MatSnackBar) { }
 
@@ -44,6 +46,7 @@ export class LoginComponent implements OnInit {
         this.snackBar.open('Successfully logged in!', '', {
           duration: 3000
         });
+        this.cartService.getCartItemsNumber();
       }
     });
   }
