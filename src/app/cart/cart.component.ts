@@ -8,8 +8,6 @@ import { CartdialogComponent} from '../cart/cartdialog/cartdialog.component';
 import { AppState, initialAppState } from '../store/state/app.state';
 import { GetItems, DeleteItem } from '../store/actions/cart.actions';
 import { initialCartState } from '../store/state/cart.state';
-import { selectUserList } from '../store/selectors/cart.selectors';
-import { error } from 'util';
 
 @Component({
   selector: 'app-cart',
@@ -66,7 +64,7 @@ export class CartComponent implements OnInit {
     } else
     {return;}
     
-    this.cartService.incrementQuantity(this.products[index].id).subscribe(()=>{
+    this.cartService.incrementQuantity(this.products[index].id).subscribe(() => {
       this.products[index].quantity  = this.products[index].quantity + 1;
       this.products[index].stockQuantity = this.products[index].stockQuantity-1;
     },
@@ -94,6 +92,8 @@ export class CartComponent implements OnInit {
 
     this.cartService.decrementQuantity(this.products[index].id).subscribe(()=>{
       this.products[index].quantity  = this.products[index].quantity - 1;
+      this.products[index].stockQuantity = this.products[index].stockQuantity + 1;
+
     },
     error =>{ console.log(error);});
 

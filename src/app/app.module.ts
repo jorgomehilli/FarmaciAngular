@@ -33,6 +33,7 @@ import { appReducers } from './store/reducers/app.reducer';
 import { CartEffects } from './store/effects/cart.effects';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { HttpErrorInterceptor } from './error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,10 @@ import { TokenInterceptorService } from './token-interceptor.service';
     ProductsService,
     {provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
+    multi: true
+  },
+  {provide: HTTP_INTERCEPTORS,
+    useClass: HttpErrorInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

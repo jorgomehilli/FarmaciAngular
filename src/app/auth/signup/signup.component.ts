@@ -40,9 +40,13 @@ export class SignupComponent implements OnInit {
       this.snackBar.open("Successfully registered !" , "", {duration: 3000});
       this.router.navigate(['/login']);
       
-    })
-  }
-  // onSubmit() {
+    },  error =>
+    {console.log(error.error);}
+    )}
+  
+  
+  
+    // onSubmit() {
   //   if(this.signupForm.valid)
   //   {
   //   this.authService.recieveUsers().subscribe((usersResponse) => {

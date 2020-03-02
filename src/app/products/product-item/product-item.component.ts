@@ -18,8 +18,6 @@ import { AddItem } from '../../store/actions/cart.actions'
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: any;
-  private cartProducts: any[] = [];
-  private newQuantity;
 
   constructor(private cartService: CartService,
     private productService: ProductsService,
@@ -53,6 +51,7 @@ export class ProductItemComponent implements OnInit {
     //     this.authService.getActualUserId());
 
     // });
+
     if (this.product.quantity<=0){
     this.snackBar.open('There is no '+this.product.name+' left in stock','',{duration:3000});
     return;}
