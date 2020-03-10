@@ -184,4 +184,8 @@ export class AuthService {
         this.username = localStorage.getItem('name');
         return this.username;
     }
+
+    isEmailUnique(email: String){
+        return this.http.get(`http://localhost:8787/users/email/${email}`);
+    }
 }

@@ -34,6 +34,7 @@ import { CartEffects } from './store/effects/cart.effects';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { HttpErrorInterceptor } from './error-interceptor.service';
+import { UniqueEmailValidatorDirective } from './unique-email-validator.directive';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { HttpErrorInterceptor } from './error-interceptor.service';
     UsersdialogComponent,
     FilterPipe,
     CartdialogComponent,
-    FooterComponent
+    FooterComponent,
+    UniqueEmailValidatorDirective
   ],
 
   entryComponents: [ProductsdialogComponent,

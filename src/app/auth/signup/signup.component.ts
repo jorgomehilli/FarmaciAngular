@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { MatSnackBar } from '@angular/material';
 import { CartService } from 'src/app/cart/cart.service';
-import { User } from '../user.model';
 import { Router } from '@angular/router';
+import { UniqueEmailValidatorDirective } from 'src/app/unique-email-validator.directive';
+import { Observable, timer } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +29,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = new FormGroup({
       'firstname': new FormControl(null, Validators.required),
       'lastname': new FormControl(null, Validators.required),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'email': new FormControl(null, [Validators.required, Validators.email],[this.usernameValidator()]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
   }
@@ -38,15 +40,40 @@ export class SignupComponent implements OnInit {
       console.log(user);
       this.signupForm.reset();      
       this.snackBar.open("Successfully registered !" , "", {duration: 3000});
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']);      
+    });
+  }
+  
+
+  usernameValidator(): AsyncValidatorFn  {
+    return (control: AbstractControl): Observable<{[key: string]: any | null}> => {
+
+
+return timer(1000).pipe(switchMap(()=>{
+      return this.authService.isEmailUnique(control.value).pipe(delay(750)).pipe(
+      map(res => {
+        // if res is true, username exists, return true
+        return res ? { usernameExists: true } 
+        : null;
+        // NB: Return null if there is no error
+      })
+     );
+
+}));
       
-    },  error =>
-    {}
-    )}
+    // return this.authService.isEmailUnique(control.value).pipe(delay(750)).pipe(
+    //   map(res => {
+    //     // if res is true, username exists, return true
+    //     return res ? { usernameExists: true } 
+    //     : null;
+    //     // NB: Return null if there is no error
+    //   })
+    //  );
+    }
+  }
   
   
-  
-    // onSubmit() {
+  // onSubmit() {
   //   if(this.signupForm.valid)
   //   {
   //   this.authService.recieveUsers().subscribe((usersResponse) => {
